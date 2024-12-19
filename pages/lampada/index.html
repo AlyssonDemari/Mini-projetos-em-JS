@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lâmpada </title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        :root{
+            --bg: #3e3f42;
+            --section: #417571 ;
+            --input: #cad5de;
+            --button: #d1deba ;
+            --font: "Roboto Flex", sans-serif;;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg);
+            font-family: var(--font);
+        }
+
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--section);
+            padding: 10px 30px 20px 30px;
+            width: 300px;
+            height: 500px;
+            border-radius: 20px;
+        }
+
+        input[type=button]{
+            padding: 5px 10px;
+            width: 80px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .ligada{
+            filter: drop-shadow(-10px -30px 80px yellow);
+        }
+
+    </style>
+</head>
+<body>
+    <section id="container">
+    </section>
+
+    <script>      
+        const container = document.querySelector('section#container')
+
+        //img
+        let img = document.createElement('img')
+        img.src = 'images/desligada.png'
+        img.alt = 'imagem de uma lampada desligada'
+
+        //button
+        let button = document.createElement('input')
+        button.type = 'button'
+        button.value = 'Ligar'
+        button.onclick = ligar
+
+        //função responsável por ligar 
+        function ligar(){
+            img.src = 'images/ligada.png'
+            button.value = 'Desligar'
+            button.onclick = desligar
+            img.classList.add('ligada')
+        }
+
+        //função responsável por desligar 
+        function desligar(){
+            img.src = 'images/desligada.png'
+            button.value = 'Ligar'
+            button.onclick = ligar
+            img.classList.remove('ligada')
+        }
+
+        //função responsável por quebrar 
+        function quebrada(){
+            img.src = 'images/quebrada.png'
+            img.classList.remove('ligada')
+            button.value = 'Arrumar'
+            button.onclick = arrumar
+        }
+
+        //função responsável por arrumar 
+        function arrumar(){
+            img.src = 'images/desligada.png'
+            button.value = 'Ligar'
+            button.onclick = ligar
+            img.classList.remove('ligada')
+        }
+         
+
+        // leva as tags para o DOM 
+        container.insertAdjacentElement('beforeend', img)
+        container.insertAdjacentElement('beforeend', button)
+        img.addEventListener('dblclick', quebrada)
+    </script>
+</body> 
+</html>

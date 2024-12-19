@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Projetos em JS</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+
+        :root{
+            --bg: #3e3f42;
+            --section: #417571 ;
+            --input: #cad5de;
+            --button: #d1deba ;
+            --font: "Roboto Flex", sans-serif;;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg);
+            font-family: var(--font);
+        }
+
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: var(--section);
+            padding: 10px 30px 20px 30px;
+            width: 300px;
+            height: 500px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section id="container">
+    </section>
+
+    <script>
+            const projetos = [
+                { 'id': '1', 'nome': 'Calculadora de IMC', 'href': '../pages/IMC/index.html' },
+                { 'id': '2', 'nome': 'Lâmpada', 'href': '../pages/lampada/index.html' },
+                { 'id': '3', 'nome': 'Slider', 'href': '../pages/slider/index.html'  }
+            ]
+
+            const containerPai = document.querySelector('section')
+             
+            const carregarProjetos = (projetos, container) => {
+                projetos.forEach(projeto =>{
+                    container.innerHTML += `            
+                    <div class='item'>
+                         <button> <a href="${projeto.href}"> ${projeto.nome}</a> </button>
+                    </div>`
+                })
+            }
+
+            carregarProjetos(projetos, containerPai);
+
+    </script>
+</body>
+</html>
