@@ -110,6 +110,19 @@
         container.insertAdjacentElement('beforeend', img)
         container.insertAdjacentElement('beforeend', button)
         img.addEventListener('dblclick', quebrada)
+
+        // Cria uma função que quando a lampada atinge 10 clicks ela quebra 
+        let clickCount = 0; //contador de controle para os clicks
+        button.addEventListener('click', function() {
+            clickCount++;
+            if (clickCount >= 10) {
+                img.src = 'images/quebrada.png'
+                img.classList.remove('ligada')
+                button.value = 'Arrumar'
+                button.onclick = arrumar
+                clickCount = 0;
+            }
+        });
     </script>
 </body> 
 </html>
