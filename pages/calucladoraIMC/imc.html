@@ -11,6 +11,7 @@
         *{
             margin: 0px;
             padding: 0px;
+            text-decoration: none;
         }
 
         :root{
@@ -50,13 +51,13 @@
             background-color: var(--section);
             padding: 10px 30px 20px 30px;
             width: 300px;
-            height: 500px;
+            height: 450px;
             border-radius: 20px;
         }
 
         .resultado{
             width: 300px;
-            height: 200px;
+            height: 150px;
             background-color: var(--input);
             border-radius: 20px;
             
@@ -66,7 +67,7 @@
             display: flex;
             text-align: center;
             align-items: center;
-            height: 200px;
+            height: 150px;
         }
 
 
@@ -106,6 +107,27 @@
 
         label{
             color: var(--button);
+        }
+
+        a{
+            display: inline-block;
+            color: var(--bg);
+            text-align: center;
+            width: 100px;
+            height: 20px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--button);
+            font-weight: 600;
+            transition: background-position 0.2s ease-out;
+            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+
+        a:hover{
+            background-position: left bottom;
         }
 
     </style>
@@ -179,6 +201,16 @@
             }
 
         }
+
+        const button = () =>{
+                const voltar = document.createElement('a')
+                let section = document.querySelector('section')
+                voltar.href = "../../index.html"
+                voltar.innerHTML = "Voltar"
+                section.insertAdjacentElement('afterend', voltar)
+            }
+
+            button()
     </script>
 </body> 
 </html>

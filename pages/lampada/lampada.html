@@ -11,6 +11,7 @@
         *{
             margin: 0px;
             padding: 0px;
+            text-decoration: none;
         }
 
         :root{
@@ -38,19 +39,50 @@
             background-color: var(--section);
             padding: 10px 30px 20px 30px;
             width: 300px;
-            height: 500px;
+            height: 400px;
             border-radius: 20px;
         }
 
         input[type=button]{
-            padding: 5px 10px;
-            width: 80px;
+            display: block;
+            color: var(--bg);
+            text-align: center;
+            width: 100px;
+            height: 20px;
+            padding: 8px 8px 20px 8px;
             border-radius: 10px;
-            border: none;
+            background-color: var(--button);
+            font-weight: 600;
+            transition: background-position 0.2s ease-out;
+            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+            border:none;
         }
 
         .ligada{
             filter: drop-shadow(-10px -30px 80px yellow);
+        }
+
+        a{
+            display: inline-block;
+            color: var(--bg);
+            text-align: center;
+            width: 100px;
+            height: 20px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--button);
+            font-weight: 600;
+            transition: background-position 0.2s ease-out;
+            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+
+        a:hover{
+            background-position: left bottom;
         }
 
     </style>
@@ -96,6 +128,7 @@
             button.value = 'Arrumar'
             button.onclick = arrumar
         }
+        
 
         //função responsável por arrumar 
         function arrumar(){
@@ -123,6 +156,17 @@
                 clickCount = 0;
             }
         });
+
+        function botao(){
+            const voltar = document.createElement('a')
+            let section = document.querySelector('section')
+            voltar.href = "../../index.html"
+            voltar.innerHTML = "Voltar"
+            section.insertAdjacentElement('afterend', voltar)
+        }
+
+        botao() 
+
     </script>
 </body> 
 </html>

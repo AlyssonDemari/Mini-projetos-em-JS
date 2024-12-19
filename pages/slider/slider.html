@@ -11,6 +11,7 @@
         *{
             margin: 0px;
             padding: 0px;
+            text-decoration: none;
         }
 
         :root{
@@ -37,8 +38,8 @@
             align-items: center;
             background-color: var(--section);
             padding: 10px 30px 20px 30px;
-            width: 800px;
-            height: 500px;
+            width: 500px;
+            height: 360px;
             border-radius: 20px;
         }
 
@@ -92,56 +93,85 @@
             transition: all 0.5s;
             border-radius: 0px 10px 10px 0px;
         }
+        a{
+            display: inline-block;
+            color: var(--bg);
+            text-align: center;
+            width: 100px;
+            height: 20px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--button);
+            font-weight: 600;
+            transition: background-position 0.2s ease-out;
+            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+
+        a:hover{
+            background-position: left bottom;
+        }
     </style>
 </head>
 <body>
-
+    <section>
         <div class="container-slide">
             <div class="action-button" id="previous">&laquo</div>
             <div class="container-item" id="container-item"></div>
             <div class="action-button" id="next">&raquo</div>
         </div>
-
-
+    </section>
     <script>
-const images = [
-    { 'id': '1', 'url': 'images/pascal.png' },
-    { 'id': '2', 'url': 'images/flin.png' },
-    { 'id': '3', 'url': 'images/rapunzel.png' },
-    { 'id': '4', 'url': 'images/cadeira.png' }
-];
+            const images = [
+                { 'id': '1', 'url': 'images/pascal.png' },
+                { 'id': '2', 'url': 'images/flin.png' },
+                { 'id': '3', 'url': 'images/rapunzel.png' },
+                { 'id': '4', 'url': 'images/cadeira.png' }
+            ];
 
-const containerItens = document.querySelector('#container-item');
+            const containerItens = document.querySelector('#container-item');
 
-const loadImages = (images, container) => {
-    images.forEach(image => {  
-        container.innerHTML += `
-            <div class='item'> 
-                <img src='${image.url}' />
-            </div>    
-        `;
-    });
-};
+            const loadImages = (images, container) => {
+                images.forEach(image => {  
+                    container.innerHTML += `
+                        <div class='item'> 
+                            <img src='${image.url}' />
+                        </div>    
+                    `;
+                });
+            };
 
-loadImages(images, containerItens);
+            loadImages(images, containerItens);
 
-let items = document.querySelectorAll('.item')
+            let items = document.querySelectorAll('.item')
 
-const previous = () => {
-    containerItens.appendChild(items[0]);
-    items = document.querySelectorAll('.item');
-}
+            const previous = () => {
+                containerItens.appendChild(items[0]);
+                items = document.querySelectorAll('.item');
+            }
 
-const next =() => {
-    const lastItem = items[items.length - 1]
-    containerItens.insertBefore(lastItem, items[0])
-    items = document.querySelectorAll('.item');
-}
+            const next =() => {
+                const lastItem = items[items.length - 1]
+                containerItens.insertBefore(lastItem, items[0])
+                items = document.querySelectorAll('.item');
+            }
 
-document.querySelector('#previous').addEventListener('click', previous)
-document.querySelector('#next').addEventListener('click', next)
+            document.querySelector('#previous').addEventListener('click', previous)
+            document.querySelector('#next').addEventListener('click', next)
 
-setInterval(previous, 2000)
+            setInterval(previous, 2000)
+
+            const button = () =>{
+                const voltar = document.createElement('a')
+                let section = document.querySelector('section')
+                voltar.href = "../../index.html"
+                voltar.innerHTML = "Voltar"
+                section.insertAdjacentElement('afterend', voltar)
+            }
+
+            button()
     </script>
 </body>
 </html>
