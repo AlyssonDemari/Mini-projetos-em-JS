@@ -6,144 +6,144 @@
     <title>Slider</title>
     <style>
 
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 
-        *{
-            margin: 0px;
-            padding: 0px;
-            text-decoration: none;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 
-        :root{
-            --bg: #3e3f42;
-            --section: #417571 ;
-            --input: #cad5de;
-            --button: #d1deba ;
-            --font: "Roboto Flex", sans-serif;;
-        }
-        body{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: var(--bg);
-            font-family: var(--font);
-        }
+    *{
+        margin: 0px;
+        padding: 0px;
+        text-decoration: none;
+    }
 
+    :root{
+        --bg: #3e3f42;
+        --section: #417571 ;
+        --input: #cad5de;
+        --button: #d1deba ;
+        --font: "Roboto Flex", sans-serif;;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: var(--bg);
+        font-family: var(--font);
+    }
+
+    section{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--section);
+        padding: 10px 30px 20px 30px;
+        width: 900px;
+        height: 450px;
+        border-radius: 20px;
+    }
+
+    .container-slide{
+        display: flex;
+        justify-content: space-between;
+        width: 50vw;
+        height: 50vh;
+        border-radius: 10px;
+    }
+
+    .container-item{
+        position: absolute;
+        display: flex;
+        width: 50vw;
+        height: 50vh;
+        overflow: hidden;
+    }
+
+    .item{
+        width: 50vw;
+        height: 50vh;
+        transition: all 1s;
+    }
+
+    .item:first-child{
+        margin-left: -100%;
+    }
+
+    .item img{
+        width: 50vw;
+        height: 50vh;
+        border-radius: 10px;
+    }
+
+    .action-button{
+        font: bold 30px sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        border-radius: 10px;
+        color: #00000000;
+        z-index: 1;
+    }
+
+    .action-button:hover{
+        color: #cad5de;
+        background-color: rgba(0, 0, 0, 0.315);
+        cursor: pointer;
+        transition: all 0.5s;
+        border-radius: 0px 10px 10px 0px;
+    }
+    a{
+        display: inline-block;
+        color: var(--bg);
+        text-align: center;
+        width: 100px;
+        height: 20px;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: var(--button);
+        font-weight: 600;
+        transition: background-position 0.2s ease-out;
+        background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+    }
+
+    a:hover{
+        background-position: left bottom;
+    }
+
+    @media (min-width: 320px) and (max-width: 480px) {
         section{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            background-color: var(--section);
-            padding: 10px 30px 20px 30px;
-            width: 900px;
-            height: 450px;
-            border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        background-color: var(--section);
+        padding: 10px 30px 20px 30px;
+        width: 300px;
+        height: 300px;
+        border-radius: 20px;
         }
 
-        .container-slide{
-            display: flex;
-            justify-content: space-between;
-            width: 50vw;
-            height: 50vh;
-            border-radius: 10px;
-        }
-
-        .container-item{
-            position: absolute;
-            display: flex;
-            width: 50vw;
-            height: 50vh;
-            overflow: hidden;
-        }
-
-        .item{
-            width: 50vw;
-            height: 50vh;
-            transition: all 1s;
-        }
-
-        .item:first-child{
-            margin-left: -100%;
-        }
-
+        .container-slide,
+        .container-item,
+        .item,
         .item img{
-            width: 50vw;
-            height: 50vh;
-            border-radius: 10px;
+            width: 80vw;
+            height: 35vh;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        section{
+        width: 500px;
+        height: 290px;
         }
 
-        .action-button{
-            font: bold 30px sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            border-radius: 10px;
-            color: #00000000;
-            z-index: 1;
-        }
-
-        .action-button:hover{
-            color: #cad5de;
-            background-color: rgba(0, 0, 0, 0.315);
-            cursor: pointer;
-            transition: all 0.5s;
-            border-radius: 0px 10px 10px 0px;
-        }
-        a{
-            display: inline-block;
-            color: var(--bg);
-            text-align: center;
-            width: 100px;
-            height: 20px;
-            margin: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: var(--button);
-            font-weight: 600;
-            transition: background-position 0.2s ease-out;
-            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
-            background-size: 200% 100%;
-            background-position: right bottom;
-        }
-
-        a:hover{
-            background-position: left bottom;
-        }
-
-        @media (min-width: 320px) and (max-width: 480px) {
-            section{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            background-color: var(--section);
-            padding: 10px 30px 20px 30px;
-            width: 300px;
-            height: 300px;
-            border-radius: 20px;
-            }
-
-            .container-slide,
-            .container-item,
-            .item,
-            .item img{
-                width: 80vw;
-                height: 35vh;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            section{
-            width: 500px;
-            height: 290px;
-            }
-
-        }
-
+    }
 
 
     </style>
