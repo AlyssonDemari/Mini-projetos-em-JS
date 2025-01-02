@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            text-decoration: none;
+        }
+
+        :root{
+            --bg: #3e3f42;
+            --section: #417571 ;
+            --input: #cad5de;
+            --button: #d1deba ;
+            --font: "Roboto Flex", sans-serif;;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg);
+            font-family: var(--font);
+        }
+
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--section);
+            padding: 10px 30px 20px 30px;
+            width: 300px;
+            height: 450px;
+            border-radius: 20px;
+        }
+
+        a{
+            display: inline-block;
+            color: var(--bg);
+            text-align: center;
+            width: 150px;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: var(--button);
+            font-weight: 600;
+            transition: background-position 0.2s ease-out;
+            background-image: linear-gradient(to right, var(--input) 50%, var(--button) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+        a:hover{
+            background-position: left bottom;
+        }
+
+        .container{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .questions-container{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 80%;
+        }
+        
+        .answer-container{
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .controls-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        button{
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            border-radius: 15px 3px 15px 3px;
+            width: 10em;
+            transition: 0s ease-in-out;
+        }
+
+        .answer:disabled{
+            color: black;
+            cursor:not-allowed;
+        }
+
+        .hide{
+            display: none;
+        }
+
+        .correct{
+            background-color: rgba(0, 128, 0, 0.637);
+        }
+
+        .incorrect{
+            background-color: rgba(255, 0, 0, 0.705);
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="questions-container hide">
+                <span style="margin: 20px;" class="question">Pergunte aqui</span>
+                <div class="answer-container">
+                    <button class="answer button">Pergunta 1</button>
+                    <button class="answer button">Pergunta 2</button>
+                    <button class="answer button">Pergunta 3</button>
+                    <button class="answer button">Pergunta 4</button>
+                </div>
+            </div>
+            <div class="controls-container">
+                <button class="start-quiz button">Começar Quiz</button>
+                <button class="next-question button hide">Próxima pergunta</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const button = () =>{
+            const voltar = document.createElement('a')
+            let section = document.querySelector('section')
+            voltar.href = "../../index.html"
+            voltar.innerHTML = "Voltar"
+            section.insertAdjacentElement('afterend', voltar)
+        }
+        button()
+
+
+        const startQuiz = document.querySelector('.start-quiz')
+        const questionsCont = document.querySelector('.questions-container')
+        const answerCont = document.querySelector('.answer-container')
+        const questionText = document.querySelector('.question')
+        const nextQuestionButton = document.querySelector('.next-question')
+        const father =  document.querySelector('.container')
+
+        let currentQuestion = 0 //contador de perguntas 
+        let totalCorrect = 0
+
+  
+        startQuiz.addEventListener('click', ()=> {
+            startQuiz.classList.add('hide')
+            questionsCont.classList.remove('hide')
+            father.style.justifyContent = 'space-between';
+            
+            nextQuestion()
+        })
+
+        nextQuestionButton.addEventListener('click', ()=> {
+            nextQuestion()
+        })
+
+   
+        const nextQuestion = () => {
+
+            resetState()
+
+            if(questions.length == currentQuestion){
+               return finishGame()
+            }
+            
+            questionText.textContent = questions[currentQuestion].question
+            questions[currentQuestion].answers.forEach(answer => {
+                const newAnswer = document.createElement('button')
+                newAnswer.classList.add("button", "answer")
+                newAnswer.textContent = answer.text
+
+                if(answer.correct){
+                    newAnswer.dataset.correct = answer.correct
+                }
+                answerCont.appendChild(newAnswer)
+
+                newAnswer.addEventListener('click', selectAnswer)
+            })
+        } 
+
+        const resetState = () => {
+            while(answerCont.firstChild){
+                answerCont.removeChild(answerCont.firstChild)
+            }
+
+            nextQuestionButton.classList.add('hide')
+        }
+
+        const selectAnswer = (event) => {
+            const answerClicked = event.target
+
+            if (answerClicked.dataset.correct) {
+                totalCorrect++
+            } 
+
+            document.querySelectorAll('.answer').forEach(button => {
+                if(button.dataset.correct){
+                    button.classList.add('correct')
+                }else {
+                    button.classList.add('incorrect')
+                }
+
+                button.disabled= true
+            })
+
+            nextQuestionButton.classList.remove('hide')
+            currentQuestion++
+        }
+
+        function finishGame() {
+        const totalQuestions = questions.length
+        const performance = Math.floor(totalCorrect * 100 / totalQuestions)
+        
+        let message = ""
+
+            switch (true) {
+                case (performance >= 90):
+                message = "Excelente :)"
+                break
+                case (performance >= 70):
+                message = "Muito bom :)"
+                break
+                case (performance >= 50):
+                message = "Bom"
+                break
+                default:
+                message = "Pode melhorar :("
+            }
+
+            questionsCont.innerHTML = 
+            `
+                <p style="margin: 30px ;"> Você acertou ${totalCorrect} de ${totalQuestions} questões!
+                <span>Resultado: ${message}</span></p>
+                <button onclick=window.location.reload() class="button">Refazer teste</button>
+            `
+        }
+
+
+
+
+
+
+
+
+        const questions = [
+            { question: "Qual a cor do mar?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: false},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: true},
+                ]
+            },
+            { question: "Qual a cor do sangue?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: true},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: false},
+                ]
+            },
+            { question: "Qual a cor do sol?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: false},
+                    {text: "amarelo", correct: true},
+                    {text: "azul", correct: false},
+                ]
+            },
+            { question: "Qual a cor do viado?",
+                answers: [
+                    {text: "Roxo", correct: true},
+                    {text: "vermelho", correct: false},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: false},
+                ]
+            },
+            { question: "Qual a cor da maça?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: true},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: false},
+                ]
+            },
+            { question: "Qual a cor da banana?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: false},
+                    {text: "amarelo", correct: true},
+                    {text: "azul", correct: false},
+                ]
+            },
+            { question: "Qual a cor da amora?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: false},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: true},
+                ]
+            },
+            { question: "Qual a cor da rosa?",
+                answers: [
+                    {text: "Roxo", correct: false},
+                    {text: "vermelho", correct: true},
+                    {text: "amarelo", correct: false},
+                    {text: "azul", correct: false},
+                ]
+            },
+        ]
+    </script>
+</body>
+</html>
